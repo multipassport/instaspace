@@ -31,5 +31,7 @@ if __name__ == '__main__':
     for link_number, link in enumerate(image_links):
         filename = f'spacex{link_number + 1}.jpg'
         filepath = os.path.join(folder, filename)
-
-        fetch_spacex_launch(link, filepath)
+        try:
+            fetch_spacex_launch(link, filepath)
+        except ConnectionError:
+            print('Connection Error')
