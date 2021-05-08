@@ -1,5 +1,6 @@
 import glob
 import os
+import logging
 
 from dotenv import load_dotenv
 from instabot import Bot
@@ -32,7 +33,10 @@ if __name__ == '__main__':
         thumbnail_image(f'./images/{image}', image_maximal_size)
 
     bot = Bot()
-    bot.login(username=os.getenv('INSTAGRAM_USERNAME'), password=os.getenv('PASSWORD'))
+    bot.login(
+        username=os.getenv('INSTAGRAM_USERNAME'),
+        password=os.getenv('INSTAGRAM_PASSWORD'),
+        )
 
     for image in images:
         try:
