@@ -27,7 +27,7 @@ if __name__ == '__main__':
     folder = './images'
     Path(folder).mkdir(exist_ok=True)
 
-    hubble_collection = 'wallpaper'
+    hubble_collection = 'holiday_cards'
     hubble_collection_url = f'http://hubblesite.org/api/v3/images/{hubble_collection}'
 
     response = requests.get(hubble_collection_url)
