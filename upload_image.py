@@ -5,6 +5,7 @@ import logging
 from dotenv import load_dotenv
 from instabot import Bot
 from PIL import Image
+from requests.exceptions import ConnectionError
 from urllib.parse import urlsplit
 
 
@@ -23,14 +24,15 @@ def get_file_extension(url):
 
 if __name__ == '__main__':
     load_dotenv()
-    logging.basicConfig(filename="upload_image.log", filemode='w')
+    logging.basicConfig(filename='upload_image.log', filemode='w')
 
-    folder_path = "./images"
+    folder_path = './images'
     image_maximal_size = (1080, 1080)
-    images = [image for image in glob.glob(folder_path + '/*.jpg')]
 
-    for image in os.listdir('./images'):
-        thumbnail_image(f'./images/{image}', image_maximal_size)
+    for image in os.listdir(folder_path):
+        thumbnail_image(os.path.join(folder_path, image), image_maximal_size)
+
+    images = glob.glob(f'{folder_path}/*.jpg')
 
     bot = Bot()
     bot.login(
@@ -40,8 +42,7 @@ if __name__ == '__main__':
 
     for image in images:
         try:
-            print(f'Uploading {image}')
             bot.upload_photo(image)
-        except Exception as error:
+        except ConnectionError as error:
             print(str(error))
             logging.error(error)
