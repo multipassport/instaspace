@@ -19,15 +19,15 @@ pip install -r requirements.txt
 
 * Теперь Вы можете запустить:
  ```bash
- fetch_spacex.py
+ python fetch_spacex.py
  ```
  ```bash
- fetch_hubble.py
+ python fetch_hubble.py
  ```
  для скачивания фотографии с соответствующих сервисов. Фотографии будут сохранены в папке `images` в основном каталоге
 * Для загрузки фото на Вашу страницу в [Instagram](https://www.instagram.com) запустите:
 ```
-upload_image.py
+python upload_image.py
 ```
 Скрипт преобразует фотографии в формат, необходимый для загрузки фото и выложит их. К уже загруженным фото будет добавлено расширение `.REMOVE_ME`, их можно свободно удалять
 * Для повторного запуска скрипта `upload_image.py` необходимо удалить папку `config` в основном каталоге
