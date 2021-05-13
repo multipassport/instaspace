@@ -43,7 +43,6 @@ if __name__ == '__main__':
             hubble_image_link = get_image_link(hubble_url)
             extension = get_file_extension(hubble_image_link)
             hubble_image_filepath = os.path.join(folder, f'{image_id}{extension}')
-            print(hubble_image_link)
             fetch_photo(hubble_image_link, hubble_image_filepath)
         except ConnectionError:
             print('Connection Error')

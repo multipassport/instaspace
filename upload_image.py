@@ -44,5 +44,4 @@ if __name__ == '__main__':
         try:
             bot.upload_photo(image)
         except ConnectionError as error:
-            print(str(error))
             logging.error(error)
