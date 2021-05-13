@@ -3,6 +3,7 @@ import os
 import logging
 
 from dotenv import load_dotenv
+from fetch_photo import get_file_extension
 from instabot import Bot
 from PIL import Image
 from requests.exceptions import ConnectionError
@@ -15,11 +16,6 @@ def thumbnail_image(photo, image_size):
     image.thumbnail(image_size)
     image.convert('RGB').save(new_image_name, 'JPEG')
     return image
-
-
-def get_file_extension(url):
-    extension = os.path.splitext(urlsplit(url).path)[-1]
-    return extension
 
 
 if __name__ == '__main__':

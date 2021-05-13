@@ -2,15 +2,10 @@ import os
 import requests
 import urllib3
 
-from fetch_photo import fetch_photo
+from fetch_photo import fetch_photo, get_file_extension
 from pathlib import Path
 from requests.exceptions import ConnectionError
 from urllib.parse import urlsplit
-
-
-def get_file_extension(url):
-    extension = os.path.splitext(urlsplit(url).path)[-1]
-    return extension
 
 
 def fetch_hubble_collection_image_ids(collection_name):
