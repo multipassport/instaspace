@@ -2,6 +2,7 @@ import os
 import requests
 import urllib3
 
+from fetch_photo import fetch_photo
 from pathlib import Path
 from requests.exceptions import ConnectionError
 from urllib.parse import urlsplit
@@ -10,14 +11,6 @@ from urllib.parse import urlsplit
 def get_file_extension(url):
     extension = os.path.splitext(urlsplit(url).path)[-1]
     return extension
-
-
-def fetch_hubble_photo(url, image_id, filepath, extension):
-    hubble_image_filepath = os.path.join(filepath, f'{image_id}{extension}')
-    response = requests.get(url, verify=False)
-    response.raise_for_status()
-    with open(hubble_image_filepath, 'wb') as file:
-        file.write(response.content)
 
 
 def fetch_hubble_collection_image_ids(collection_name):
@@ -49,6 +42,8 @@ if __name__ == '__main__':
             hubble_url = f'http://hubblesite.org/api/v3/image/{image_id}'
             hubble_image_link = get_image_link(hubble_url)
             extension = get_file_extension(hubble_image_link)
-            fetch_hubble_photo(hubble_image_link, image_id, folder, extension)
+            hubble_image_filepath = os.path.join(folder, f'{image_id}{extension}')
+            print(hubble_image_link)
+            fetch_photo(hubble_image_link, hubble_image_filepath)
         except ConnectionError:
             print('Connection Error')

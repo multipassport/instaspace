@@ -1,16 +1,9 @@
 import os
 import requests
 
+from fetch_photo import fetch_photo
 from pathlib import Path
 from requests.exceptions import ConnectionError
-
-
-def fetch_spacex_launch(url, filepath):
-    response = requests.get(url)
-    response.raise_for_status()
-
-    with open(filepath, 'wb') as file:
-        file.write(response.content)
 
 
 def get_image_links(url):
@@ -28,10 +21,10 @@ if __name__ == '__main__':
     spacex_url = 'https://api.spacexdata.com/v3/launches/108'
     image_links = get_image_links(spacex_url)
 
-    for link_number, link in enumerate(image_links):
-        filename = f'spacex{link_number + 1}.jpg'
+    for link_number, link in enumerate(image_links, 1):
+        filename = f'spacex{link_number}.jpg'
         filepath = os.path.join(folder, filename)
         try:
-            fetch_spacex_launch(link, filepath)
+            fetch_photo(link, filepath)
         except ConnectionError:
             print('Connection Error')
